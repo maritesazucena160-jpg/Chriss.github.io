@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Surprise! ✨</title>
+    <style>
+        :root {
+            --pink: #ffafcc;
+            --dark-pink: #fb6f92;
+            --soft-white: #fff0f3;
+        }
+
+        body {
+            background-color: var(--soft-white);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #4a4a4a;
+        }
+
+        #container {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(255, 175, 204, 0.3);
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            border: 3px solid var(--pink);
+        }
+
+        h2 { color: var(--dark-pink); }
+
+        .hidden { display: none; }
+
+        .input-group {
+            margin: 20px 0;
+        }
+
+        input {
+            padding: 10px;
+            border: 2px solid var(--pink);
+            border-radius: 10px;
+            outline: none;
+            width: 80%;
+        }
+
+        button {
+            background-color: var(--dark-pink);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background-color: #ff5c8d;
+        }
+
+        #longMessage {
+            line-height: 1.6;
+            white-space: pre-wrap;
+            text-align: left;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .emoji-float {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div id="container">
+    <div id="quiz">
+        <div class="emoji-float">🔐💖</div>
+        <h2>Wait! Prove you're my Bestie...</h2>
+        
+        <div id="q1" class="input-group">
+            <p>1. What is my last name? 🍿</p>
+            <input type="text" id="ans1" placeholder="Answer here...">
+        </div>
+
+        <div id="q2" class="input-group hidden">
+            <p>2. What grade do we get closed? 🗓️</p>
+            <input type="text" id="ans2" placeholder="Answer here...">
+        </div>
+
+        <div id="q3" class="input-group hidden">
+            <p>3. Do I have a boyfriend now? 🍕</p>
+            <input type="text" id="ans3" placeholder="Yes or No?">
+        </div>
+
+        <button onclick="checkAnswer()">Next ✨</button>
+        <p id="error" style="color: red; font-size: 0.8rem;" class="hidden">Try again, fake bestie! 😂</p>
+    </div>
+
+    <div id="longMessage" class="hidden">
+        <div style="text-align: center; font-size: 3rem;">🎀</div>
+        <h2 style="text-align: center;">To My Favorite Person</h2>
+        <p>
+            Hey bestie! You actually got the answers right (I knew you would). 
+
+            I just wanted to take a second to tell you how much you mean to me. Life is honestly such a rollercoaster, but having you in the seat next to me makes it a lot less scary and a whole lot more fun. 
+
+            Thank you for being the person who hears my silent messages, laughs at my terrible jokes, and stays by my side even when I'm being "too much." You aren't just a friend; you're my chosen family. 
+
+            I'm so lucky to have you. Here's to a million more inside jokes, late-night chats, and core memories. 
+
+            Love you forever! 🌸✨
+        </p>
+        <div style="text-align: center; margin-top: 20px;">
+            <button onclick="location.reload()">Read Again? 💖</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentStep = 1;
+
+    // CUSTOMIZE YOUR ANSWERS HERE!
+    const answers = {
+        ans1: "azucena", 
+        ans2: "grade 10",
+        ans3: "yes"
+    };
+
+    function checkAnswer() {
+        const input = document.getElementById('ans' + currentStep);
+        const val = input.value.toLowerCase().trim();
+        const error = document.getElementById('error');
+
+        if (val === answers['ans' + currentStep]) {
+            error.classList.add('hidden');
+            document.getElementById('q' + currentStep).classList.add('hidden');
+            currentStep++;
+
+            if (currentStep <= 3) {
+                document.getElementById('q' + currentStep).classList.remove('hidden');
+                input.value = "";
+            } else {
+                showMessage();
+            }
+        } else {
+            error.classList.remove('hidden');
+        }
+    }
+
+    function showMessage() {
+        document.getElementById('quiz').classList.add('hidden');
+        document.getElementById('longMessage').classList.remove('hidden');
+        // Bonus: Change background to celebrate
+        document.body.style.backgroundColor = "#ffc8dd";
+    }
+</script>
+
+</body>
+</html>
